@@ -174,8 +174,9 @@
       
       <canvas id="firstCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the canvas and puts the text on the canvas "firstCanvas" */
-        var canvas1 = document.getElementById('firstCanvas');
+        var canvas1 = document.getElementById('firstCanvas'); 
         var context1 = canvas1.getContext("2d");
+        //I can change the font, size, text, and color, as well as other features of this text
         context1.font = '20pt Calibri';
         context1.fillStyle = "black";
         context1.fillText("Original image will go here", 10, 20);
@@ -183,9 +184,10 @@
 
       <!-- I created a second canvas and renamed the first canvas to prevent any future confusion -->
       <canvas id="secondCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <script>
+      <script> /* This script initiates the second canvas and puts the text on the second canvas "secondCanvas" */
         var canvas2 = document.getElementById('secondCanvas');
         var context2 = canvas2.getContext("2d");
+        //I can change the font, size, text, and color, as well as other features of this text
         context2.font = '20pt Calibri';
         context2.fillStyle = "black";
         context2.fillText("Blue-intensified image will go here", 10, 20);
