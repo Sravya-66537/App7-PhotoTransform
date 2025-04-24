@@ -131,26 +131,63 @@
       <div>
         Press orange button to create or choose image file:
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
+
+        <script>
+          const fileInput = document.getElementById('fileInput');
+        
+          fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+        
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              const img = new Image();
+              img.onload = function() {
+                // This function allows the image to be generated on the first canvas
+                context1.clearRect(0, 0, canvas1.width, canvas1.height);
+                context1.drawImage(img, 0, 0, canvas1.width, canvas1.height);
+
+                // This function takes the image from the first canvas and generates the blue-intensified image into the second canvas, automatically
+              const imageData=context1.getImageData(0,0, canvas1.width, canvas1.height);
+              const data=imageData.data;
+
+              // This part of the code ampliflies the blue in the rgb of the image on canvas 1
+                for (let i = 0; i < data.length; i += 4) {
+                  //data[i]=0; commented out so that red is unchanged
+                  //data[i + 1]=0; commented out so that green is unchanged
+                  data[i + 2] = Math.min(data[i + 2] + 255, 255); //blue has a value of 128
+                  //data[i + 3] = 150; // opacity at maximum
+                  }
+
+              context2.putImageData(imageData, 0, 0);
+              };
+              img.src = event.target.result;
+            };
+        
+            reader.readAsDataURL(file);
+          });
+        </script>
+        
       </div>
       <div id="messageDisplayArea"></div>
       
       <canvas id="firstCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the canvas and puts the text on the canvas "firstCanvas" */
         var canvas1 = document.getElementById('firstCanvas');
-        var context = canvas1.getContext("2d");
-        context.font = '20pt Calibri';
-        context.fillStyle = "black";
-        context.fillText("Original image will go here", 10, 20);
+        var context1 = canvas1.getContext("2d");
+        context1.font = '20pt Calibri';
+        context1.fillStyle = "black";
+        context1.fillText("Original image will go here", 10, 20);
       </script>
 
       <!-- I created a second canvas and renamed the first canvas to prevent any future confusion -->
       <canvas id="secondCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script>
         var canvas2 = document.getElementById('secondCanvas');
-        var context = canvas2.getContext("2d");
-        context.font = '20pt Calibri';
-        context.fillStyle = "black";
-        context.fillText("Blue-intensified image will go here", 10, 20);
+        var context2 = canvas2.getContext("2d");
+        context2.font = '20pt Calibri';
+        context2.fillStyle = "black";
+        context2.fillText("Blue-intensified image will go here", 10, 20);
       </script>
 
     </div><!-- /content -->
