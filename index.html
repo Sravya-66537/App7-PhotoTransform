@@ -24,10 +24,10 @@
   http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   
   Brief Description of Goal of Code:
-  blah, blah, blah,
+  Original image uploaded to first canvas will be blue-intensified onto the second canvas
  
   Known Issues:
-  blah, blah, blah, blah
+  None
 -->
 
  <head>
@@ -134,13 +134,23 @@
       </div>
       <div id="messageDisplayArea"></div>
       
-      <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext("2d");
+      <canvas id="firstCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+      <script> /* This script initiates the canvas and puts the text on the canvas "firstCanvas" */
+        var canvas1 = document.getElementById('firstCanvas');
+        var context = canvas1.getContext("2d");
         context.font = '20pt Calibri';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
+      </script>
+
+      <!-- I created a second canvas and renamed the first canvas to prevent any future confusion -->
+      <canvas id="secondCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+      <script>
+        var canvas2 = document.getElementById('secondCanvas');
+        var context = canvas2.getContext("2d");
+        context.font = '20pt Calibri';
+        context.fillStyle = "black";
+        context.fillText("Blue-intensified image will go here", 10, 20);
       </script>
 
     </div><!-- /content -->
